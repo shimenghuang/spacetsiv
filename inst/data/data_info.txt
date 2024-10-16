@@ -1,0 +1,4 @@
+The data file expression.RData is obtained from the github repository 
+https://github.com/ash-res/PC-GMM 
+accompanying the paper by Patel et al. 2024. 
+Access version: commit 6a016c7. 

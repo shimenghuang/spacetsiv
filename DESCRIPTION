@@ -1,0 +1,19 @@
+Package: spacetsiv
+Title: Sparse causal effect two-sample IV
+Version: 0.0.0.9000
+Authors@R: 
+    person("Shimeng", "Huang", email = "dora.huang.sunshine@gmail.com",
+    role = c("aut", "cre"))
+Description: Sparse causal effect estimators with instrumental variables for 
+    one-sample individual-level data (Pfister and Peters, 2022) 
+    and two-sample summary statistics (Huang et al., 2024), as well as other 
+    conventional non-sparse one and two-sample IV estimators. 
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Suggests: 
+    testthat (>= 3.0.0), ggplot2, tidyr, dplyr, systemfit, pracma
+Config/testthat/edition: 3
+URL: https://github.com/shimenghuang/spacetsiv
+BugReports: https://github.com/shimenghuang/spacetsiv/issues
