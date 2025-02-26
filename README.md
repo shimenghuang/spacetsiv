@@ -13,5 +13,5 @@ remotes::install_github("shimenghuang/spacetsiv")
 
 [1] N. Pfister and J. Peters (2022). Identifiability of sparse causal effects using instrumental variables. In Proceedings of the Thirty-Eighth Conference on Uncertainty in Artificial Intelligence, volume 180 of Proceedings of Machine Learning Research, pages 1613–1622.
 
-[2] S. Huang, N. Pfister, and Jack Bowden (2024). Sparse Causal Effect Estimation using Two-Sample Summary Statistics in the Presence of Unmeasured Confounding. arXiv. 
+[2] S. Huang, N. Pfister, and Jack Bowden (2024). Sparse Causal Effect Estimation using Two-Sample Summary Statistics in the Presence of Unmeasured Confounding. [doi:10.48550/arXiv.2410.12300](https://doi.org/10.48550/arXiv.2410.12300) 
 

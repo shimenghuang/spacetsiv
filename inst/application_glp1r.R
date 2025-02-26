@@ -3,7 +3,7 @@ library(ggplot2)
 
 # ---- load data ----
 
-load("script/glp1r_data//expression.RData") # from the paper by Ashish et al 2023
+load("inst/data/expression.RData") # from the paper by Ashish et al 2023
 
 # beta 1, 8, 6, 9, 3 are top 5 in Table 2 in Patel et al 2023
 exp_names <- c("brain caudate", "atrial appendage", "hypothalamus", "left ventricle", "lung",
@@ -113,7 +113,7 @@ res_l0_all <- sparseMVMR_estimator(gamma_res = dat_sumstat$coef_y,
                                    control = list(factr = 1e5), 
                                    lower = -1, 
                                    upper = 1)
-saveRDS(res_l0_all, file = paste0("script/result/l0_all_ldclump_strongest", top_num, "_alpha", alpha, ".rds"))
+saveRDS(res_l0_all, file = paste0("inst/result/l0_all_ldclump_strongest", top_num, "_alpha", alpha, ".rds"))
 
 beta_hat_maxpval <- res_l0_all$beta_hat_best[,which.max(res_l0_all$pval_best)]
 idx_pass <- which(res_l0_all$pval_best > alpha)
@@ -129,7 +129,7 @@ pval_l0 <- c("maxpval" = max(res_l0_all$pval_best),
              "maxset" = res_l0_all$pval_best[idx_pass][which.min(colSums(res_l0_pass == 0))])
 saveRDS(list(beta_hat = beta_hat_l0,
              pval = pval_l0),
-        file = paste0("script/result/l0_df_ldclump_strongest", top_num, "_alpha", alpha, ".rds"))
+        file = paste0("inst/result/l0_df_ldclump_strongest", top_num, "_alpha", alpha, ".rds"))
 
 ci_methods <- c("sandwich", "q_project", "gmm_approx")
 for (ci_method in ci_methods) {
@@ -177,7 +177,7 @@ for (ci_method in ci_methods) {
   
   saveRDS(list(summary_l0 = summary_l0,
                pval_l0 = pval_l0), 
-          file = paste0("script/result/l0_df_ldclump_strongest", top_num, "_alpha_", alpha, "_", ci_method, ".rds"))
+          file = paste0("inst/result/l0_df_ldclump_strongest", top_num, "_alpha_", alpha, "_", ci_method, ".rds"))
 }
 
 # plot only for subset method
@@ -204,7 +204,7 @@ pval_pass <- res_l0_all$pval_all[[1]][idx_pass]
 colnames(beta_hat_pass) <- exp_names[idx_pass]
 saveRDS(list(beta_hat = beta_hat_pass,
              pval = pval_pass),
-        file = paste0("script/result/l0_df_ldclump_strongest", top_num, "_multipass_alpha", alpha, ".rds"))
+        file = paste0("inst/result/l0_df_ldclump_strongest", top_num, "_multipass_alpha", alpha, ".rds"))
 
 ci_method <- "q_project"
 summary_l0 <- lapply(1:ncol(beta_hat_pass), \(xx) {
@@ -254,7 +254,7 @@ summary_l0
 
 saveRDS(list(summary_l0 = summary_l0,
              pval_l0 = pval_l0), 
-        file = paste0("script/result/l0_df_ldclump_strongest", top_num, "_multipass_alpha", alpha, ".rds"))
+        file = paste0("inst/result/l0_df_ldclump_strongest", top_num, "_multipass_alpha", alpha, ".rds"))
 
 # ---- L1 ----
 res_l1_all <- grid_search_iv_lasso_sumstat(beta_init = beta_iv2, 
@@ -277,7 +277,7 @@ res_l1_all <- grid_search_iv_lasso_sumstat(beta_init = beta_iv2,
                                            verbose = FALSE)
 res_l1_all$beta_hat_all_orig
 res_l1_all$beta_hat_all_refit
-saveRDS(res_l1_all, file = paste0("script/result/l1_all_ldclump_strongest", top_num, "_alpha", alpha, ".rds"))
+saveRDS(res_l1_all, file = paste0("inst/result/l1_all_ldclump_strongest", top_num, "_alpha", alpha, ".rds"))
 
 beta_hat_maxpval <- res_l1_all$beta_hat_all_orig[,which.max(res_l1_all$pval_all_orig)]
 idx_pass <- which(res_l1_all$pval_all_orig > alpha)
@@ -294,7 +294,7 @@ pval_l1 <- c("maxpval" = max(res_l1_all$pval_all_orig),
              "minpen" = res_l1_all$pval_all_orig[idx_pass][1])
 saveRDS(list(beta_hat = beta_hat_l1,
              pval = pval_l1),
-        file = paste0("script/result/l1_orig_df_ldclump_strongest", top_num, "_alpha", alpha, ".rds"))
+        file = paste0("inst/result/l1_orig_df_ldclump_strongest", top_num, "_alpha", alpha, ".rds"))
 
 beta_hat_maxpval <- res_l1_all$beta_hat_all_refit[,which.max(res_l1_all$pval_all_refit)]
 idx_pass <- which(res_l1_all$pval_all_refit > alpha)
@@ -311,7 +311,7 @@ pval_l1 <- c("maxpval" = max(res_l1_all$pval_all_refit),
              "minpen" = res_l1_all$pval_all_refit[idx_pass][1])
 saveRDS(list(beta_hat = beta_hat_l1,
              pval = pval_l1),
-        file = paste0("script/result/l1_refit_df_ldclump_strongest", top_num, "_alpha", alpha, ".rds"))
+        file = paste0("inst/result/l1_refit_df_ldclump_strongest", top_num, "_alpha", alpha, ".rds"))
 
 ci_methods <- c("sandwich", "q_project", "gmm_approx")
 for (ci_method in ci_methods) {
@@ -365,7 +365,7 @@ for (ci_method in ci_methods) {
   
   saveRDS(list(summary_l1 = summary_l1,
                pval_l1 = pval_l1), 
-          file = paste0("script/result/l1_df_ldclump_strongest", top_num, "_alpha", alpha, "_", ci_method, ".rds"))
+          file = paste0("inst/result/l1_df_ldclump_strongest", top_num, "_alpha", alpha, "_", ci_method, ".rds"))
 }
 
 summary_l1 %>%
@@ -452,7 +452,7 @@ for (ci_method in ci_methods) {
   
   saveRDS(list(summary_tsiv = summary_tsiv,
                pval_tsiv = pval_tsiv), 
-          file = paste0("script/result/tsiv_df_ldclump_strongest", top_num, "_alpha", alpha, "_", ci_method, ".rds"))
+          file = paste0("inst/result/tsiv_df_ldclump_strongest", top_num, "_alpha", alpha, "_", ci_method, ".rds"))
 }
 
 # ---- summarize results ----
@@ -462,19 +462,19 @@ exp_names <- c("brain caudate", "atrial appendage", "hypothalamus", "left ventri
                "nerve", "pancreas", "stomach", "testis", "thyroid")
 ci_method <- "q_project"
 
-l0_df_ldclump0.05 <- readRDS(paste0("script/result/l0_df_ldclump_strongest", top_num, "_multipass_alpha", alpha, ".rds"))
+l0_df_ldclump0.05 <- readRDS(paste0("inst/result/l0_df_ldclump_strongest", top_num, "_multipass_alpha", alpha, ".rds"))
 df_l0 <- l0_df_ldclump0.05$summary_l0
 df_l0$penalty <- "l0"
 df_l0 <- df_l0 %>%
   dplyr::rename(stoprule = setnum)
 
-l1_df_ldclump0.05 <- readRDS(paste0("script/result/l1_df_ldclump_strongest", top_num, "_alpha", alpha, "_", ci_method, ".rds"))
+l1_df_ldclump0.05 <- readRDS(paste0("inst/result/l1_df_ldclump_strongest", top_num, "_alpha", alpha, "_", ci_method, ".rds"))
 df_l1 <- l1_df_ldclump0.05$summary_l1
 df_l1$penalty <- "l1"
 df_all <- rbind(df_l0, df_l1)
 df_all$exposure <- factor(df_all$exposure, levels = exp_names)
 
-tsiv_df_ldclump0.05 <- readRDS(paste0("script/result/tsiv_df_ldclump_strongest", top_num, "_alpha", alpha, "_", ci_method, ".rds"))
+tsiv_df_ldclump0.05 <- readRDS(paste0("inst/result/tsiv_df_ldclump_strongest", top_num, "_alpha", alpha, "_", ci_method, ".rds"))
 df_tsiv <- tsiv_df_ldclump0.05$summary_tsiv
 df_tsiv$penalty <- "tsiv"
 df_tsiv$stoprule <- ""
@@ -567,7 +567,7 @@ df_long %>%
   ggplot2::coord_flip() +
   ggplot2::labs(y = "estimate")
 
-ggplot2::ggsave(paste0("script/result/glp1r_strongest", top_num, "_alpha_", alpha, "_with_", ci_method,
+ggplot2::ggsave(paste0("inst/result/glp1r_strongest", top_num, "_alpha_", alpha, "_with_", ci_method,
                        ".pdf"),
                 width = 7, height = 4)
 
