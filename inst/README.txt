@@ -5,12 +5,14 @@ This folder contains reproducible code for the simulations and real-data applica
 - run_dgp1.R
 - run_dgp2.R
 - run_dgp3.R
+- run_dgp4.R
 These scripts save outputs in the `result` folder.
 
 # Scripts to produce plots:
 - summarize_dgp1.R
 - summarize_dgp2.R
 - summarize_dgp3.R
+- summarize_dgp4.R
 These scripts load the previous outputs in the `result` folder.
 
 # Real-data file:
